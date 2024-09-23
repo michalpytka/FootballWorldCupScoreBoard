@@ -75,6 +75,19 @@ public class FootballScoreBoardTest {
     }
 
     @Test
+    public void getSummary_withFewScorelessGames_shouldReturnListOfScorelessGames() {
+        scoreBoard.startNewGame("Mexico", "Canada");
+        scoreBoard.startNewGame("Spain", "Brazil");
+        scoreBoard.startNewGame("Germany", "France");
+
+        assertEquals("""
+                1. Germany 0 - France 0
+                2. Spain 0 - Brazil 0
+                3. Mexico 0 - Canada 0
+                """, scoreBoard.getSummary());
+    }
+
+    @Test
     public void getSummary_withSetOfActiveGames_shouldReturnAppropriatlyOrderedList() {
         scoreBoard.updateScores(scoreBoard.startNewGame("Mexico", "Canada"), 0, 5);
         scoreBoard.updateScores(scoreBoard.startNewGame("Spain", "Brazil"), 10, 2);
