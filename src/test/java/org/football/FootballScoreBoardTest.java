@@ -27,7 +27,7 @@ public class FootballScoreBoardTest {
 
     @ParameterizedTest
     @MethodSource("validTeamNames")
-    public void startNewGame_withValidNamesForTeams_shouldReturnGame(String homeTeam, String awayTeam) {
+    public void startNewGame_withValidNamesForTeams_shouldReturnGameId(String homeTeam, String awayTeam) {
         assertNotNull(scoreBoard.startNewGame(homeTeam, awayTeam));
     }
 
@@ -39,34 +39,34 @@ public class FootballScoreBoardTest {
 
     @Test
     public void finishGame_withUnfinishedGame_shouldFinishIt() {
-        Integer matchId = scoreBoard.startNewGame(HOME_TEAM, AWAY_TEAM);
-        assertTrue(scoreBoard.finishGame(matchId));
+        Integer gameId = scoreBoard.startNewGame(HOME_TEAM, AWAY_TEAM);
+        assertTrue(scoreBoard.finishGame(gameId));
     }
 
     @Test
     public void finishGame_withFinishedGame_shouldReturnFalse() {
-        Integer matchId = scoreBoard.startNewGame(HOME_TEAM, AWAY_TEAM);
-        scoreBoard.finishGame(matchId);
-        assertFalse(scoreBoard.finishGame(matchId));
+        Integer gameId = scoreBoard.startNewGame(HOME_TEAM, AWAY_TEAM);
+        scoreBoard.finishGame(gameId);
+        assertFalse(scoreBoard.finishGame(gameId));
     }
 
     @Test
-    public void finishGame_withNonExistentMatchId_shouldReturnFalse() {
+    public void finishGame_withNonExistentGameId_shouldReturnFalse() {
         assertFalse(scoreBoard.finishGame(-1));
     }
 
     @ParameterizedTest
     @MethodSource("invalidScores")
     public void updateScore_withInvalidScores_shouldReturnFalse(Integer homeScore, Integer awayScore) {
-        Integer matchId = scoreBoard.startNewGame(HOME_TEAM, AWAY_TEAM);
-        assertFalse(scoreBoard.updateScores(matchId, homeScore, awayScore));
+        Integer gameId = scoreBoard.startNewGame(HOME_TEAM, AWAY_TEAM);
+        assertFalse(scoreBoard.updateScores(gameId, homeScore, awayScore));
     }
 
     @ParameterizedTest
     @MethodSource("validScores")
     public void updateScore_withValidScores_shouldReturnTrue(Integer homeScore, Integer awayScore) {
-        Integer matchId = scoreBoard.startNewGame(HOME_TEAM, AWAY_TEAM);
-        assertTrue(scoreBoard.updateScores(matchId, homeScore, awayScore));
+        Integer gameId = scoreBoard.startNewGame(HOME_TEAM, AWAY_TEAM);
+        assertTrue(scoreBoard.updateScores(gameId, homeScore, awayScore));
     }
 
     @Test

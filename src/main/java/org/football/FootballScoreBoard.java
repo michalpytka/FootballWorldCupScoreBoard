@@ -5,11 +5,11 @@ public class FootballScoreBoard {
         return null;
     }
 
-    public boolean finishGame(Integer matchId) {
+    public boolean finishGame(Integer gameId) {
         return false;
     }
 
-    public boolean updateScores(Integer matchId, Integer homeScore, Integer awayScore) {
+    public boolean updateScores(Integer gameId, Integer homeScore, Integer awayScore) {
         return false;
     }
 
