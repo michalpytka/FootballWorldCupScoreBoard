@@ -1,14 +1,15 @@
 package org.football;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class FootballScoreBoard {
 
-    final HashMap<Integer, FootballGame> gameMap;
-    Integer gameIdCounter;
+    private final LinkedHashMap<Integer, FootballGame> gameMap;
+    private Integer gameIdCounter;
 
     public FootballScoreBoard() {
-        gameMap = new HashMap<>();
+        gameMap = new LinkedHashMap<>();
         gameIdCounter = 0;
     }
 
@@ -29,13 +30,34 @@ public class FootballScoreBoard {
         if (game == null) {
             return false;
         }
-
-        game.updateScores(homeScore, awayScore);
-        return true;
+        return game.updateScores(homeScore, awayScore);
     }
 
     public String getSummary() {
-        return null;
+        final StringBuilder builder = new StringBuilder();
+        AtomicReference<Integer> ordinalListNumber = new AtomicReference<>(1);
+        gameMap.sequencedValues()
+                .reversed()
+                .stream()
+                .sorted((game1, game2) -> {
+                    final Integer game1Sum = game1.getHomeScore() + game1.getAwayScore();
+                    final Integer game2Sum = game2.getHomeScore() + game2.getAwayScore();
+                    return game2Sum.compareTo(game1Sum);
+                })
+                .forEach(footballGame -> {
+                    builder.append(ordinalListNumber)
+                            .append(". ")
+                            .append(footballGame.getHomeTeam())
+                            .append(" ")
+                            .append(footballGame.getHomeScore())
+                            .append(" - ")
+                            .append(footballGame.getAwayTeam())
+                            .append(" ")
+                            .append(footballGame.getAwayScore())
+                            .append("\n");
+                    ordinalListNumber.getAndSet(ordinalListNumber.get() + 1);
+                });
+        return builder.toString();
     }
 
     private void checkIfTeamHasActiveGame(String name) {

@@ -19,7 +19,9 @@ public class FootballGameTest {
     @ParameterizedTest
     @MethodSource("validTeamNames")
     public void construct_withValidNames_shouldCreateNewObject(String homeTeam, String awayTeam) {
-        new FootballGame(homeTeam, awayTeam);
+        FootballGame footballGame = new FootballGame(homeTeam, awayTeam);
+        assertEquals(0, footballGame.getHomeScore());
+        assertEquals(0, footballGame.getAwayScore());
     }
 
     @ParameterizedTest
