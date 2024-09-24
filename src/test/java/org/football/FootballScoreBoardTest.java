@@ -38,6 +38,11 @@ public class FootballScoreBoardTest {
     }
 
     @Test
+    public void startNewGame_withBothTeamsHavingTheSameName_shouldThrowException() {
+        assertThrows(IllegalArgumentException.class, () -> scoreBoard.startNewGame(HOME_TEAM, HOME_TEAM));
+    }
+
+    @Test
     public void finishGame_withUnfinishedGame_shouldFinishIt() {
         Integer gameId = scoreBoard.startNewGame(HOME_TEAM, AWAY_TEAM);
         assertTrue(scoreBoard.finishGame(gameId));

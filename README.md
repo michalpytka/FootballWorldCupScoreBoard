@@ -15,6 +15,7 @@
 - A team that already has a game active cannot take part in a new game
 - As the update score operation take in two scores as parameters, it is assumed that any combination of non-null and non-negative numbers is valid
 - Getting summary from a board that has no active games returns an empty string
+- Both teams in a game cannot have the same name
 
 ## Further comments
 - Apache commons lang was added to project for the singular use of StringUtils.isBlank() method. In case of this exercise it might be overkill, but in a regular setting this dependency might be already present in project
