@@ -1,5 +1,6 @@
 package org.football;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -22,6 +23,11 @@ public class FootballGameTest {
         FootballGame footballGame = new FootballGame(homeTeam, awayTeam);
         assertEquals(0, footballGame.getHomeScore());
         assertEquals(0, footballGame.getAwayScore());
+    }
+
+    @Test
+    public void construct_withSameTeamOnBothSides_shouldThrowException() {
+        assertThrows(IllegalArgumentException.class, () -> new FootballGame(HOME_TEAM, HOME_TEAM));
     }
 
     @ParameterizedTest

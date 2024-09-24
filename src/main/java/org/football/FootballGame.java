@@ -11,6 +11,9 @@ public class FootballGame {
     public FootballGame(String homeTeam, String awayTeam) {
         validateName(homeTeam);
         validateName(awayTeam);
+        if (homeTeam.equals(awayTeam)) {
+            throw new IllegalArgumentException("Cannot start a match with same team on both sides; name:" + homeTeam);
+        }
 
         this.homeTeam = homeTeam;
         this.awayTeam = awayTeam;
