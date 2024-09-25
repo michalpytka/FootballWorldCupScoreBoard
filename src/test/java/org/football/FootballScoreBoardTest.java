@@ -60,6 +60,11 @@ public class FootballScoreBoardTest {
         assertFalse(scoreBoard.finishGame(-1));
     }
 
+    @Test
+    public void finishGame_withNullGameId_shouldReturnFalse() {
+        assertFalse(scoreBoard.finishGame(null));
+    }
+
     @ParameterizedTest
     @MethodSource("invalidScores")
     public void updateScore_withInvalidScores_shouldReturnFalse(Integer homeScore, Integer awayScore) {
